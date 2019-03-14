@@ -1,0 +1,22 @@
+{% include 'navagation.html' %}
+<div class="main">
+{% block content %}
+    
+	<div class="">
+		<div class="d-flex justify-content-center">
+			<div class="card" style="width: 45rem;">
+		<form action="{{url_for('deleteStates',sid=sd.id)}}" method="POST">
+			<div class="card-body bg-info">
+				<h2 class="card-text" style="color:blue;font-size:25px;margin-left:5%;">Are you sure you want to delete {{sd.name}}</h2>
+			</div>
+			<div class="card-footer d-flex justify-content-center">
+				<input type="submit" class="btn btn-danger" value="Delete" style="margin-right: 5%;">
+			    <button type="button" class="btn btn-warning"><a href="/home">Cancel</a></button>
+			</div>
+			
+		</form>
+	</div>
+		</div>
+		
+	</div>
+	{% endblock content %}

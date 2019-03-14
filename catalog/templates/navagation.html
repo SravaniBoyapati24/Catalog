@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>STATES DETAILS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+  <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  <style>
+    body {
+       font-family:Lucida Fax;
+	   font-style:Demibold Italic;
+	   background-image: url("https://st2.depositphotos.com/1003595/11256/i/950/depositphotos_112569790-stock-photo-world-map-on-transparent-background.jpg");
+       background-color:Beige;
+	   background-repeat: no-repeat;
+	   background-size: cover;
+	   
+		}
+    .sidenav {
+      height: 100%;
+      width: 310px;
+      position: fixed;
+      z-index: 1;
+      top: 50px;
+      left: 0;
+	  
+      background-image: linear-gradient(Salmon,GhostWhite,LightGreen);
+      overflow-x: hidden;
+      padding-top: 20px;
+	  border-right:2px outset MediumTurquoise;
+    }
+
+    .sidenav a {
+      padding: 6px 6px 6px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color:  MidnightBlue;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      color:Fuchsia;
+    }
+
+    .main {
+      margin-left: 300px; /* Same as the width of the sidenav */
+
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+	img{
+	  border:4px double MidnightBlue;
+	  border-radius:20px 80px;
+	}
+.text-center {
+  position: relative;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .3s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .3s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.text-center:hover .image {
+  opacity: 0.3;
+}
+
+.text-center:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color:DodgerBlue;
+  color:#ff99cc;
+  font-size:16px;
+  font-family:verdana;
+  font-style:Bold Italic;
+  padding: 5px 15px;
+  border-radius:20px 80px;
+}
+.panel panel-primary{
+color:blue;
+ }	</style>
+  {% block head %}{% endblock head %}
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+              alert(messages[i]);
+            }
+          </script>
+        {% endif %}
+{% endwith %}
+<nav class="navbar navbar-inverse  navbar-fixed-top">
+  <div class="container-fluid" style="background-color: #ffccff;">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('home') }}"style="color:DarkBlue ;font-family:algerian;">States Details </a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      {% if 'username' in session %}
+            <li><button class="btn btn-warning mr-sm-2" style="margin-top: 5px;"><a href="{{ url_for('addstates')}}" style="color:Blue;">ADD STATES CATEGORY</a></button></li>
+            <li style="margin: 10px;"><p class="text-primary mr-sm-2">{{ session.username }}</p></li>
+			
+            <li><a href="{{ url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+      {% else %}
+            <li><a href="{{ url_for('showLogin')}}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+      {% endif %}
+      
+    </ul>
+  </div>
+</nav>
+  
+<div class="sidenav">
+  <table>
+      {% for sd in tss_det %}
+      <tr>
+          <td><a href="{{ url_for('showstates',sid=sd.id)}}">{{sd.name}}</a></td>
+          {% if 'username' in session %}
+            <td><a href = "{{ url_for('editStates',sid=sd.id)}}">
+            <span class="glyphicon glyphicon-pencil pull-right " data-toggle="tooltip" title="Edit Category" data-placement="bottom"> </span> </a></td>
+            <td><a href = "{{ url_for('deleteStates',sid=sd.id)}}">
+            <span class="glyphicon glyphicon-trash pull-right" data-toggle="tooltip" title="Delete Category" data-placement="top"> </span> </a></td>  
+          {% endif %}   
+        </tr>              
+      {% endfor %}
+  </table>
+</div>
+<div class="container">
+
+      <div class="main" style="margin-top: 100px;">
+        
+            {% block content %}
+              
+            {% endblock content %}
+          
+        </div>
+  </div>
+  
+</body>
+</html>

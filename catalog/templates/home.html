@@ -1,0 +1,28 @@
+{% include 'navagation.html' %}
+<div class="main">
+{% block content %}
+  <!-- {% for sd in tss_det %}
+    <a href="{{ url_for('showstates', sid=sd.id)}}">{{sd.name}}</a><br>
+    {% endfor %} -->
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	{% endwith %}
+
+	<div class="text-center">
+		<h1 style="color: DodgerBlue;font-family:Lucida Calligraphy;">Welcome to statesDetails</h1> 
+		<img style="width:50%; height: 550px; margin: 0; padding: 0; margin-top: 20px" src="https://ideaplanet.org/wp-content/uploads/2018/10/list-of-indian-states-and-union-territories-with-india-map-with-states-and-capitals.gif">
+	    <div class="middle">
+		  <div class="text">There are 29 states and seven Union territories in the country. Let's take a look at the states and their capitals.</div>
+		</div>
+	</div>
+
+    
+{% endblock content %}
+</div>

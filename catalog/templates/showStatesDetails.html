@@ -1,0 +1,49 @@
+{% include 'navagation.html' %}
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px;"><a href="{{url_for('adddistrict',sname=tds.name)}}" style="text-decoration: none;color:blue;"><strong>Add New States</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px;">
+{% for ts in tsh %}
+
+	<div class="col-sm-4 text-center">
+		<div class="panel panel-primary"style="border:3px solid aqua;">
+			<div class="panel-heading">
+				<h4 style="font-family: Algerian;">{{ ts.district }}</h4>
+			</div>
+			<div class="panel-body text-center">
+				<table style="color:Black;background-color:AntiqueWhite;border:2px solid aqua;">
+					<tr><th>District</th><td>:</td><td><h5>{{ ts.district }}</h5></td></tr>
+					<tr><th>headquartes</th><td>:</td><td><h5>{{ ts.headquartes }}</h5></td></tr>
+					<tr><th>revenue_divisions</th><td>:</td><td><h5>{{ ts.revenue_division}}</h5></td></tr>
+					<tr><th>mandals</th><td>:</td><td><h5>{{ ts.mandals}}</h5></td></tr>
+					<tr><th> population</th><td>:</td><td><h5>{{ ts. population}}</h5></td></tr>
+					<tr><th> area</th><td>:</td><td><h5>{{ ts.area}}</h5></td></tr>
+					<tr><th>density </th><td>:</td><td><h5>{{ ts.density }}</h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer">
+					<button type="button" class="btn btn-info"><a href="{{ url_for('editdistrict',sid=tds.id,dname=ts.district) }}"style="text-decoration: none;color:white;">EDIT</a></button>
+					<button type="button" class="btn btn-danger"><a href="{{ url_for('deletedistrict',sid=tds.id,dname=ts.district)}}"style="text-decoration: none;color:white;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

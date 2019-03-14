@@ -1,0 +1,14 @@
+{% include 'navagation.html' %}
+<div class="main">
+{% block content %}
+<div>
+  <h2 style="color:blue;margin-left:3%;">EDIT STATES</h2>
+  <form class="form-inline" action="{{ url_for('editStates',sid=sd.id)}}" method="post">
+    <div class="form-group" style="color:black;margin-left:3%;">
+      <label for="name">STATES NAME:</label>
+      <input type="text" class="form-control" id="name" value="{{sd.name}}" name="name">
+    </div>
+    <button type="submit" class="btn btn-default">SUBMIT</button>
+  </form>
+</div>
+{% endblock content %}

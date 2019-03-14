@@ -1,0 +1,49 @@
+{% include 'navagation.html' %}
+<div class="main">
+{% block content %}
+
+<div class="">
+		<div class="mr-sm-2 mb-2 col-sm-8" style="margin: 10px;">
+			<form action="{{ url_for('adddistrict',sname=sname)}}" method="POST">
+				<div class="panel panel-primary">
+				  <div class="panel-heading bg-success">Add District Details</div>
+				  <div class="panel-body">
+				  	
+					  <div class="form-group">
+					  	<label class="text-primary" for="district">Enter district Name:</label>
+					    <input type="name" class="form-control" name="district" placeholder="Enter district Name:"pattern="[A-Za-z ]{1,}" title="Allow Characters Only" required>
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="headquartes">Enter Headquatres</label>
+					    <input type="text" class="form-control" name="headquartes" placeholder="Enter Headquatres :" pattern="[A-Za-z0-9 ]{1,}" title="Allow Characters Only" required>
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="revenue_division">Enter revenue_divisions:</label>
+					    <input type="text" class="form-control" name="revenue_division" placeholder="Enter revenue_division:" pattern="[A-Za-z0-9 ]{1,}" title="Allow both characters and numbers only " required>
+					  </div>
+					  <div class="text-primary" class="form-group">
+					  	<label for="mandals">Enter mandals:</label>
+					    <input type="text" class="form-control" name="mandals" placeholder="Enter mandal:" pattern="[A-Za-z0-9 ]{1,}" title="Allow Characters Only" required>
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="population">Enter population:</label>
+					    <input type="text" class="form-control" name="population" placeholder="Enter Population:"title="Allow numbers Only" required>
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="area">Enter area:</label>
+					    <input type="text" class="form-control" name="area" placeholder="Enter area:"title="Allow numbers Only" required>
+					  </div>
+					  <div class="form-group">
+					  	<label class="text-primary" for="density">Enter density:</label>
+					    <input type="text" class="form-control" name="density" placeholder="Enter density:"title="Allow numbers Only" required>
+					  </div>
+					  <div class="form-group">
+					    <input type="text" class="form-control " name="bookdistictid" value="{{ sname }}" readonly>
+					  </div>
+				  </div> 
+				  <div class="panel-footer text-center"><input type="submit" class="btn btn-primary" value="Submit"></div>
+				</div>
+				</form>
+			</div>
+</div>
+{% endblock content %}
